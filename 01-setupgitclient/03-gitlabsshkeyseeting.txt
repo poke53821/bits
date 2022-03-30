@@ -1,0 +1,10 @@
+How to enable SSH login to gitlab using key instead of user name and password?
+
+1. generate a key pair from your local environment;
+   $ssh-keygen -o -t rsa -b 4096 -C "xxxx@gmail.com"
+2. now you got two files: id_rsa (private key) and id_rsa.pub (public key) in your home folder (~/.ssh)
+3. browse to gitlab.com, login and navigate to user settings (top right corner)
+4. paste the content of your public key to gitlab user settings
+5. from your working environment, try to clone your project (see below for example), and you shouldn't be prompted for user credential anymore.
+
+$git clone git@gitlab.com:whoissqr/mini-js-express.git
