@@ -1,0 +1,26 @@
+:s/black/white/ 
+Replace the first occurrence of the string ‘black’ by ‘white’
+
+:s/Ben\( Rogers\)\@!/Ben Rogers/g   
+Replace every occurrence of the string ‘Ben’ by ‘Ben Rogers’ except when ‘ Rogers’ was already present
+
+:s/.*/<p>\r&\r<\/p>/     
+Wrap the line between <p> and </p>
+
+:-1s/–/\&mdash;/g    
+Replace every occurrence of the string ‘–‘ by ‘&mdash;’ in the preceding line
+
+:/<table>/,/<\/table>/g/^$/d    
+Delete empty lines between lines containing <table> and </table>
+
+:/^$/;/^$/-1m1  
+Move text between the next two empty lines after line 1 (notice the use of a semi-colon here)
+
+:2,$-1> 
+Raise indentation of text bewteen line 2 and the penultimate line
+
+2,/^EOT/-1!sort -k2n -k1M   
+Sort data by year and month
+
+:$r! date “+Data obtained the \%c”  
+Add the output of the date command at the end of the file

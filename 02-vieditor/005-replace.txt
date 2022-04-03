@@ -1,0 +1,5 @@
+:%s/\v(.*\n){3}/&\r
+insert empty line every 3 lines
+
+:%s/.\{80}/&\r/g
+insert newline at every 80th character
