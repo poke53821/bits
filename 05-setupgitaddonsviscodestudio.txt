@@ -1,0 +1,16 @@
+On Win make sure you created ssh key;  %userprofile%/.ssh/
+Define git settings
+  C:\Users\jorgicja\github>git config --list --show-origin
+    file:/home/jorgicja/.gitconfig  user.name=poke53281
+    file:/home/jorgicja/.gitconfig  user.email=01@gmx.ch
+    file:/home/jorgicja/.gitconfig  core.quotepath=false
+
+git config --global user.name "poke53281"
+git config --global user.email "01@gmx.ch"
+
+add public key to github repo / settings / 
+
+git remote add origin git@github.com:poke53821/ghk8s.git
+
+git push --set-upstream origin master
+
