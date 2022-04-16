@@ -1,0 +1,86 @@
+Core components of Vault are:
+
+a. Storage Backends (which holds all the hashed secrets. Note: Hashicorp Consul is Hashicorp’s supported Storage Backend which has got HA solution)
+
+b. Secret Engines (Few commonly used secret engines are Key/Value (KV), PKI Certificates, SSH Keys, Active Directory)
+
+c. Authentication Methods (Few commonly used Auth Methods are userpass (username/password), github (github tokens), Token, LDAP, Okta, K8s)
+
+d. Audit Devices (Types of Audit devices are File, Syslog, Sockets. Please note when auditing is enabled, Vault requires at least one audit device to write the logs, otherwise Vault will not process any of its request.)
+
+Most commonly used Vault commands (Cheatsheet): Please note that few of the below commands will have “-tls-skip-verify”, which is required for executing Vault Cli commands in servers which is enabled with TLS.
+
+    Set up environment variables, depending on whether Vault is bquired capabilities against required secret paths)
+
+15. vault write -tls-skip-verify auth/github/map/teams/<github_team_name> value=<policy_name> (To Map the users/teams of that GitHub organization to policies in Vault.)
+
+16. vault kv get <Path to the secret> (to print the key/value details stored in the given path. Please note that unless you have got right permission to the given secret path, vault wont output the details)
+
+17. vault kv get -tls-skip-verify — field=value secret/test/test (to print the value of the mentioned key alone in the mentioned key path)
+
+18. vault kv put secret/test/test key=value (to add a new kv pair in the existing path)
+
+19. vault kv enable-versioning <Path to the secret> (to enable versioning of the K=V stored in the given path)
+
+20. vault kv put <Path to the secret> same_key=new_vaule (This is to add a new value for the existing key and validate the versioning status by executing the next command)
+
+21. vault kv get -version=<version_nub -path=github-prod (Provide the token when prompted)
+
+9. vault auth list -tls-skip-verify (This command lists the various auth methods enabled in the vault server/cluster)
+
+10. vault token renew <Token> (Renew a token)
+
+11. vault policy list -tls-skip-verify (To list all policies created in the existing vault cluster)
+
+12. vault policy read -tls-skip-verify <policy_name> (To show the details of policy created)
+
+13. vault token create -policy=<existing_policy_name> -tls-skip-verify (To create a new token with permission assigned as in the policy associated)
+
+14. vault policy write -tls-skip-verify <policy_name> <policy-file.hcl> (To create a new policy with reumber> <Path to the secret>
+
+22. vault auth enable userpass (To enable userpass as the authentication method)
+
+23. vault auth enable kubernetes (To enable K8s as the authentication method)
+
+24. vault write auth/kubernetes/login role=demo jwt=. (The default path is /kubernetes. If this auth method was en., TLS certificate)
+
+4. To initialize a vault use "vault operator init" (Depending on the seal type configured in the Vault config file, i.e., shamir (default), Auto & Transit) you will get relevant output for this command).
+
+5. vault operator init -key-shares=3 -key-threshold=2. This command will initialize Vault server with 3 unseal keys out of which 2 should be used to unseal the vault. And Command for unseal is "vault operator unseal <unseal key>"
+
+6. Vault login (Command to login into Vault using root token, which is the default option)
+
+7. vault login -method=userpass username=my-username (Provide the password when prompted)
+
+8. vault login -method=githabled at a different path, specify -path=/my-path in the CLI.)
+
+25. vault kv delete secret/creds (To Delete the latest version of the key "creds")
+
+26. vault kv delete -versions=2 secret/creds (To [K/V Version 2] Delete version 2 of key "creds")
+
+27. vault audit list (To List all audit devices path, if you need a customized path instead of the default>
+
+30. vault secrets enable database (Depending one the type of databases used, the configuration steps will change. Refer https://www.vaultproject.io/docs/secrets/databases)
+
+I've referred https://www.udemy.com/share/102o4u/ (This is a well articulated course and worth spending time to have a clear understanding about Vault) and also https://www.vaultproject.io/docs/commands. I did execute all the above commands in my local environment before mentioning it in here. So hopefully there aren't any mistakes. I hope this is an useful one which helps you to quickly refer and execute most commonly used Vault command cli. Few of these commands can be executed using Vault UI as well.rought up using http/https, you must setup a value for VAULT_ADDR. For e.g., it could be http://localhost:8200, https://<IP address of machine>:8200.
+    vault status (Displays the details about your Vault cluster).
+
+Key Value
+- - - - -
+Seal Type shamir
+Initialized true
+Sealed false
+Total Shares 5
+Threshold 3
+Version 1.0.3
+Cluster Name vault-cluster-XXXXXXX
+Cluster ID XXXXXXX-XXXXXXX-XXXXXXX-XXXXXXX
+HA Enabled true
+HA Cluster https://127.0.0.1:8201
+HA Mode active
+
+3. vault status -tls-skip-verify (If Vault is enabled with `https' i.e enabled in your vault server)
+
+28. vault audit enable file file_path=/tmp/my-file.txt (To Enable the audit device "file" enabled at "file/")
+
+29. vault secrets enable <aws/azure/mongodbatlas/gcp> (Mention the required secret engines which are supported by the vault version used by you and mention the
